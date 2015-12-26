@@ -88,5 +88,6 @@ names(extracted_data) <- gsub("-freq()", "Frequency", names(extracted_data), ign
 # average = mean
 tidy <- aggregate(. ~Subject + Activity, extracted_data, FUN=mean)
 
+
 # used row.name=FALSE as in instructions
 write.table(tidy, file = "tidy.txt", row.names = FALSE)
