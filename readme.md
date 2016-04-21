@@ -1,11 +1,19 @@
 # Getting and Cleaning Data - Course Project
 
 
+###### 0. Set Working directory
+
+```R
+setwd("./UCI HAR Dataset")
+```
+
 ###### 1. Merges the training and the test sets to create one data set.
 
 `rbind()` merges (binds) **columns**, keeping same number of rows
 
 `cbind()` merges (binds) **rows**, keeping same number of columns
+
+Load data into memory:
 
 ```R
 x_test <- read.table("test/X_test.txt")
@@ -19,7 +27,7 @@ y_train <- read.table("train/y_train.txt")
 subject_train <- read.table("train/subject_train.txt")
 ```
 
-merge rows (train + test)
+Merge rows (train + test)
 
 ```R
 x <- rbind(x_train, x_test)
@@ -38,7 +46,7 @@ colnames(y) <- "Activity"
 colnames(subject) <- "Subject"
 ```
 
-merge columns:
+Merge columns:
 * features (x)
 * activities (y)
 * subject
@@ -87,7 +95,7 @@ for (i in 1:6){ extracted_data$Activity[extracted_data$Activity == i] <- as.char
 
 ###### 4. Appropriately labels the data set with descriptive variable names.
 
-Used the command names(extracted_data) to see the current names. 
+Used the command `names(extracted_data)` to see the current names. 
 
 Name tips are on the file *features_info.txt*:
 * *Acc*: Accelerometer
@@ -114,7 +122,7 @@ names(extracted_data) <- gsub("-freq()", "Frequency", names(extracted_data), ign
 
 ###### 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-Average value: *mean*
+Average: *mean*
 
 ```R
 tidy <- aggregate(. ~Subject + Activity, extracted_data, FUN=mean)
