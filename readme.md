@@ -3,15 +3,17 @@
 
 ###### 1. Merges the training and the test sets to create one data set.
 
-**rbind** = merge (bind) **columns** keeping same number of rows
+`rbind()` merges (binds) **columns**, keeping same number of rows
 
-**cbind** = merge (bind) **rows**, keeping same number of columns
+`cbind()` merges (binds) **rows**, keeping same number of columns
 
 ```R
 x_test <- read.table("test/X_test.txt")
 y_test <- read.table("test/y_test.txt")
 subject_test <- read.table("test/subject_test.txt")
+```
 
+```R
 x_train <- read.table("train/X_train.txt")
 y_train <- read.table("train/y_train.txt")
 subject_train <- read.table("train/subject_train.txt")
@@ -59,9 +61,17 @@ extracted_data <- data[,required_columns]
 
 ###### 3. Uses descriptive activity names to name the activities in the data set
 
-`extracted_data$Activity` is a numeric field, representing an activity code
+`extracted_data$Activity` is a numeric field, an activity code.
 
-The corresponding name to each code is in the file *activity_labels.txt*
+The corresponding name to each code is in the file *activity_labels.txt*:
+```
+1 WALKING
+2 WALKING_UPSTAIRS
+3 WALKING_DOWNSTAIRS
+4 SITTING
+5 STANDING
+6 LAYING
+```
 
 ```R
 activity_labels <- read.table("activity_labels.txt", header = FALSE)
