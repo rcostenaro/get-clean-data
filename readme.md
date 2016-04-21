@@ -77,10 +77,23 @@ for (i in 1:6){ extracted_data$Activity[extracted_data$Activity == i] <- as.char
 
 ###### 4. Appropriately labels the data set with descriptive variable names.
 
+Used the command names(extracted_data) to see the current names. 
+
+Name tips are on the file *features_info.txt*:
+* *Acc*: Accelerometer
+* *Gyro*: Gyroscope
+* *Mag*: Magnitude (calculated using the Euclidean Norm)
+* *f*: Frequency (frequency domain, calculated using a Fast Fourier Transform)
+* *t*: Time (time domain, before transformation to frequency domain)
+* *-std()*: Standard Deviation (STD)
+* *-mean()*: Mean
+
+Other labels (min, max…) are not necessary, because it has been already removed (step 2), remaining only mean and STD.
+
 ```R
 names(extracted_data) <- gsub("Acc", "Accelerometer", names(extracted_data))
 names(extracted_data) <- gsub("Gyro", "Gyroscope", names(extracted_data))
-names(extracted_data) <- gsub("Mag", "Magnitude", names(extracted_data)) # replace only when name starts with a ‘t’
+names(extracted_data) <- gsub("Mag", "Magnitude", names(extracted_data)) 
 names(extracted_data) <- gsub("angle", "Angle", names(extracted_data))
 names(extracted_data) <- gsub("gravity", "Gravity", names(extracted_data))
 names(extracted_data) <- gsub("tBody", "TimeBody", names(extracted_data))
@@ -91,9 +104,13 @@ names(extracted_data) <- gsub("-freq()", "Frequency", names(extracted_data), ign
 
 ###### 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
+Average value: *mean*
+
 ```R
 tidy <- aggregate(. ~Subject + Activity, extracted_data, FUN=mean)
 ```
+
+Saved as *txt file created with write.table() using row.name=FALSE* (as in instructions)
 
 ```R
 write.table(tidy, file = "tidy.txt", row.names = FALSE)
